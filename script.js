@@ -86,8 +86,6 @@ function generatePassword () {
     let randomValue = userSpecificArr[Math.floor(Math.random() * userSpecificArr.length)];
     passwordArr.push(randomValue)
   }
-
-    console.log(passwordArr)
   // returns the array in a String without any seperator
   return passwordArr.join("")
 }
@@ -102,7 +100,6 @@ function generatePassword () {
 
 // Get references to the #generate element
 let generateBtn = document.getElementById("generate");
-let resetBtn = document.getElementById("reset")
 
 
 // Write password to the #password input
@@ -112,12 +109,6 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Additional reset password button aded
-function resetPassword () {
-  passwordText.value = null
-  userSpecificArr = [];
-}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-resetBtn.addEventListener('click', resetPassword)
