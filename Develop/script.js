@@ -1,12 +1,19 @@
-
 // Assignment code here
+const specialCharacterArr = [ "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
+"~", "*", "?", ":","\"","\\", "`", "_", "@", ">", "<", "=", ";", ".", "#", "%"];
+const uppcaseArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const lowercaseArr = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+
 function generatePassword () {
   // variable initialization
+  let userSpecificArr = [];
   let passwordLength;
   let uppercase;
   let lowercase;
   let special;
-
+  let numbers;
 
   window.alert("We are going to ask you a series of questions to determine your perfect password");
 
@@ -36,6 +43,41 @@ function generatePassword () {
   passwordCustomizationValidation();
 
 
+ 
+
+  // Logic for custom array based on user Input
+  if (uppercase && !lowercase && !numbers && !special) {
+    userSpecificArr = [...uppcaseArr]
+  } else if (lowercase && !uppercase && !numbers && !special) {
+    userSpecificArr = [...lowercaseArr]
+  } else if (special && !uppercase && !numbers && !lowercase) {
+    userSpecificArr = [...specialCharacterArr]
+  } else if (numbers && !uppercase && !lowercase && !special) {
+    userSpecificArr = [...numbers]
+  } else if (uppercase && lowercase && !numbers && !special) {
+    userSpecificArr = [...uppcaseArr, ...lowercaseArr]
+  } else if (uppercase && special && !lowercase && !numbers) {
+    userSpecificArr = [...uppcaseArr, ...specialCharacterArr]
+  } else if (uppercase && numbers && !lowercase && !special) { 
+    userSpecificArr = [...uppcaseArr, ...numberArr]
+   }else if (lowercase && special && !numbers && !uppercase) {
+    userSpecificArr = [...lowercaseArr, ...specialCharacterArr]
+  } else if (lowercase && numbers && !uppercase && !special) {
+    userSpecificArr = [...lowercaseArr, ...numberArr]
+  } else if (special && numbers && !uppercase && !lowercase) {
+    userSpecificArr = [...specialCharacterArr, ...numberArr]
+  } else if (uppercase && lowercase && special && !numbers) {
+    userSpecificArr = [...uppcaseArr, ...lowercaseArr, ...specialCharacterArr]
+  } else if (uppercase && lowercase && numbers && !special) {
+    userSpecificArr = [...uppcaseArr, ...lowercaseArr, ...numberArr]
+  } else if (lowercase && special && numbers && !uppercase) {
+    userSpecificArr = [...lowercaseArr, ...specialCharacterArr, ...numberArr]
+  } else if (special && numbers && uppercase && !lowercase) {
+    userSpecificArr = [...specialCharacterArr, ...numberArr, ...uppcaseArr]
+  } else {
+    userSpecificArr = [...numberArr, ...uppcaseArr, ...lowercaseArr, ...specialCharacterArr]
+  }
+
 
 }
 
@@ -62,6 +104,7 @@ function writePassword() {
 // Additional reset password button aded
 function resetPassword () {
   document.getElementById('password').innerHTML = null;
+  userSpecificArr = [];
 }
 
 // Add event listener to generate button
