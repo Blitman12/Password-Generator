@@ -9,11 +9,13 @@ const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 function generatePassword () {
   // variable initialization
   let userSpecificArr = [];
+  let passwordArr = [];
   let passwordLength;
   let uppercase;
   let lowercase;
   let special;
   let numbers;
+
 
   window.alert("We are going to ask you a series of questions to determine your perfect password");
 
@@ -45,7 +47,7 @@ function generatePassword () {
 
  
 
-  // Logic for custom array based on user Input
+  // Logic for custom array based on user Input - Hope to refactor this somehow
   if (uppercase && !lowercase && !numbers && !special) {
     userSpecificArr = [...uppcaseArr]
   } else if (lowercase && !uppercase && !numbers && !special) {
@@ -60,7 +62,7 @@ function generatePassword () {
     userSpecificArr = [...uppcaseArr, ...specialCharacterArr]
   } else if (uppercase && numbers && !lowercase && !special) { 
     userSpecificArr = [...uppcaseArr, ...numberArr]
-   }else if (lowercase && special && !numbers && !uppercase) {
+  } else if (lowercase && special && !numbers && !uppercase) {
     userSpecificArr = [...lowercaseArr, ...specialCharacterArr]
   } else if (lowercase && numbers && !uppercase && !special) {
     userSpecificArr = [...lowercaseArr, ...numberArr]
@@ -79,6 +81,15 @@ function generatePassword () {
   }
 
 
+  // Logic for the password Generator
+  for (let i = 0; i < passwordLength; i++) {
+    let randomValue = userSpecificArr[Math.floor(Math.random() * userSpecificArr.length)];
+    passwordArr.push(randomValue)
+  }
+
+    console.log(passwordArr)
+  // returns the array in a String without any seperator
+  return passwordArr.join("")
 }
 
 
@@ -103,7 +114,7 @@ function writePassword() {
 
 // Additional reset password button aded
 function resetPassword () {
-  document.getElementById('password').innerHTML = null;
+  passwordText.value = null
   userSpecificArr = [];
 }
 
