@@ -1,10 +1,10 @@
 // Assignment code here
-const specialCharacterArr = [ "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
+const specialArr = [ "+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^",
 "~", "*", "?", ":","\"","\\", "`", "_", "@", ">", "<", "=", ";", ".", "#", "%"];
 const uppcaseArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const lowercaseArr = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-
+let counter = 0;
 
 function generatePassword () {
   // variable initialization
@@ -14,7 +14,7 @@ function generatePassword () {
   let uppercase;
   let lowercase;
   let special;
-  let numbers;
+  let number;
 
 
   window.alert("We are going to ask you a series of questions to determine your perfect password");
@@ -34,25 +34,37 @@ function generatePassword () {
   function passwordCustomizationValidation () {
     uppercase = window.confirm("Would you like Capital Letters in your password?");
     if (uppercase) {
-      userSpecificArr = [...userSpecificArr, ...uppcaseArr]
+      userSpecificArr = [...userSpecificArr, ...uppcaseArr];
+      let randomValue = uppcaseArr[Math.floor(Math.random() * uppcaseArr.length)];
+      passwordArr.push(randomValue);
+      counter ++;
     }
 
     lowercase = window.confirm("Would you like lowercase letters in your password?");
     if (lowercase) {
-      userSpecificArr = [...userSpecificArr, ...lowercaseArr]
+      userSpecificArr = [...userSpecificArr, ...lowercaseArr];
+      let randomValue = lowercaseArr[Math.floor(Math.random() * lowercaseArr.length)];
+      passwordArr.push(randomValue);
+      counter ++;
     }
 
-    numbers = window.confirm("Would you like numbers to be included in your password?");
-    if (numbers) {
+    number = window.confirm("Would you like numbers to be included in your password?");
+    if (number) {
       userSpecificArr = [...userSpecificArr, ...numberArr]
+      let randomValue = numberArr[Math.floor(Math.random() * numberArr.length)];
+      passwordArr.push(randomValue);
+      counter ++
     }
   
     special = window.confirm("Would you like special characters in your password?");
     if (special) {
-      userSpecificArr = [...userSpecificArr, ...specialCharacterArr]
+      userSpecificArr = [...userSpecificArr, ...specialArr]
+      let randomValue = specialArr[Math.floor(Math.random() * specialArr.length)];
+      passwordArr.push(randomValue);
+      counter ++
     }
 
-    if (!uppercase && !lowercase && !numbers && !special) {
+    if (!uppercase && !lowercase && !number && !special) {
       window.alert("You must select at least one requirement");
       userSpecificArr = [];
       passwordCustomizationValidation();
@@ -62,8 +74,10 @@ function generatePassword () {
 
 
 
+
+
   // Logic for the password Generator
-  for (let i = 0; i < passwordLength; i++) {
+  for (let i = 0; i < (passwordLength - counter); i++) {
     let randomValue = userSpecificArr[Math.floor(Math.random() * userSpecificArr.length)];
     passwordArr.push(randomValue)
   }
@@ -83,6 +97,7 @@ function writePassword() {
   let password = generatePassword();
   let passwordText = document.getElementById("password");
   passwordText.value = password;
+  counter = 0;
 }
 
 
