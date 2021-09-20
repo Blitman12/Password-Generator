@@ -30,55 +30,36 @@ function generatePassword () {
   passwordLengthValidation();
 
 
-  // Validation to ensure at least one is selected
+  // Validation to ensure at least one is selected and Special Array Creation
   function passwordCustomizationValidation () {
     uppercase = window.confirm("Would you like Capital Letters in your password?");
+    if (uppercase) {
+      userSpecificArr = [...userSpecificArr, ...uppcaseArr]
+    }
+
     lowercase = window.confirm("Would you like lowercase letters in your password?");
+    if (lowercase) {
+      userSpecificArr = [...userSpecificArr, ...lowercaseArr]
+    }
+
     numbers = window.confirm("Would you like numbers to be included in your password?");
+    if (numbers) {
+      userSpecificArr = [...userSpecificArr, ...numberArr]
+    }
+  
     special = window.confirm("Would you like special characters in your password?");
+    if (special) {
+      userSpecificArr = [...userSpecificArr, ...specialCharacterArr]
+    }
 
     if (!uppercase && !lowercase && !numbers && !special) {
       window.alert("You must select at least one requirement");
+      userSpecificArr = [];
       passwordCustomizationValidation();
     }
   }
   passwordCustomizationValidation();
 
-
- 
-
-  // Logic for custom array based on user Input - Hope to refactor this somehow
-  if (uppercase && !lowercase && !numbers && !special) {
-    userSpecificArr = [...uppcaseArr]
-  } else if (lowercase && !uppercase && !numbers && !special) {
-    userSpecificArr = [...lowercaseArr]
-  } else if (special && !uppercase && !numbers && !lowercase) {
-    userSpecificArr = [...specialCharacterArr]
-  } else if (numbers && !uppercase && !lowercase && !special) {
-    userSpecificArr = [...numbers]
-  } else if (uppercase && lowercase && !numbers && !special) {
-    userSpecificArr = [...uppcaseArr, ...lowercaseArr]
-  } else if (uppercase && special && !lowercase && !numbers) {
-    userSpecificArr = [...uppcaseArr, ...specialCharacterArr]
-  } else if (uppercase && numbers && !lowercase && !special) { 
-    userSpecificArr = [...uppcaseArr, ...numberArr]
-  } else if (lowercase && special && !numbers && !uppercase) {
-    userSpecificArr = [...lowercaseArr, ...specialCharacterArr]
-  } else if (lowercase && numbers && !uppercase && !special) {
-    userSpecificArr = [...lowercaseArr, ...numberArr]
-  } else if (special && numbers && !uppercase && !lowercase) {
-    userSpecificArr = [...specialCharacterArr, ...numberArr]
-  } else if (uppercase && lowercase && special && !numbers) {
-    userSpecificArr = [...uppcaseArr, ...lowercaseArr, ...specialCharacterArr]
-  } else if (uppercase && lowercase && numbers && !special) {
-    userSpecificArr = [...uppcaseArr, ...lowercaseArr, ...numberArr]
-  } else if (lowercase && special && numbers && !uppercase) {
-    userSpecificArr = [...lowercaseArr, ...specialCharacterArr, ...numberArr]
-  } else if (special && numbers && uppercase && !lowercase) {
-    userSpecificArr = [...specialCharacterArr, ...numberArr, ...uppcaseArr]
-  } else {
-    userSpecificArr = [...numberArr, ...uppcaseArr, ...lowercaseArr, ...specialCharacterArr]
-  }
 
 
   // Logic for the password Generator
@@ -86,16 +67,11 @@ function generatePassword () {
     let randomValue = userSpecificArr[Math.floor(Math.random() * userSpecificArr.length)];
     passwordArr.push(randomValue)
   }
+
+
   // returns the array in a String without any seperator
   return passwordArr.join("")
 }
-
-
-
-
-
-
-
 
 
 // Get references to the #generate element
