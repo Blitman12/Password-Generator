@@ -82,7 +82,20 @@ function generatePassword () {
     passwordArr.push(randomValue)
   }
 
+  // Fisher-Yates Shuffle to even further randomize our array
+  function shuffle (array) {
+    let currentIndex = array.length, randomIndex;
 
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex --;
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+    }
+    return array;
+  }
+  console.log(passwordArr + " before shuffle")
+  shuffle(passwordArr);
+  console.log(passwordArr + " after shuffle")
   // returns the array in a String without any seperator
   return passwordArr.join("")
 }
